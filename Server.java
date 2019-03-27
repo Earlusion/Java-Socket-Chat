@@ -11,20 +11,25 @@ public class Server {
 
     ArrayList<Client> global = new ArrayList<Client>();
 
-    public static void start(int port) {
+    public void start(int port) {
         try {
             servSock = new ServerSocket(port);
             sock = servSock.accept();
             out = new PrintWriter(sock.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
+            while (true) {
+                
+                String inputLine = in.readLine();
+
                 if (".".equals(inputLine)) {
                     out.println("good bye");
                     break;
                 }
+                System.out.println(inputLine);
                 out.println(inputLine);
+
+                // System.out.println("Works!");
             }
         } catch (IOException e) {
             System.err.println(e);
@@ -32,14 +37,13 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        
         try {
             Server server = new Server();
             server.start(7000);
 
-            String test = in.readLine();
-            System.out.println(test);
-            
+            // String test = in.readLine();
+            // System.out.println(test);
+
             servSock.close();
 
         } catch (IOException e) {
