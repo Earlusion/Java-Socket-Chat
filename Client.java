@@ -53,14 +53,14 @@ public class Client {
             Client user = new Client(input.next());
             user.sendMessage(user.joined());
 
-            // System.out.print("Say something: ");
-            // String temp = input.next();
-
             user.sendMessage("temp");
 
-            String line;
-			while((line = in.readLine()) != null)
-				System.out.println(line);
+            String line = "";
+            do{
+                line = input.next();
+                user.sendMessage(line);
+                //System.out.println(line);
+            }while(!line.equals("exit()"));
 
             stopConnection();
             input.close();

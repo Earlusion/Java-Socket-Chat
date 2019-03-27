@@ -19,17 +19,15 @@ public class Server {
             in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 
             while (true) {
-                
                 String inputLine = in.readLine();
 
-                if (".".equals(inputLine)) {
+                if (inputLine.equals(null)) {
                     out.println("good bye");
                     break;
                 }
                 System.out.println(inputLine);
                 out.println(inputLine);
 
-                // System.out.println("Works!");
             }
         } catch (IOException e) {
             System.err.println(e);
@@ -40,9 +38,6 @@ public class Server {
         try {
             Server server = new Server();
             server.start(7000);
-
-            // String test = in.readLine();
-            // System.out.println(test);
 
             servSock.close();
 
