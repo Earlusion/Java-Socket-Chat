@@ -17,12 +17,18 @@ public class Client {
         return name;
     }
 
-    public String joined() {
+    public void joined() {
         String str = "";
 
-        str += name + " has entered the chat";
+        str += "*** " + name + " has entered the chat! ***\n";
+        out.println(str);
+    }
 
-        return str;
+    public void leave(){
+        String str = "";
+
+        str += "*** " + name + " has left the chat! ***\n";
+        out.println(str);
     }
 
     public static void startConnection(String ip, int port) throws IOException {
@@ -32,7 +38,9 @@ public class Client {
     }
 
     public String sendMessage(String msg) throws IOException {
-        out.println(msg);
+        String str = name + ":\n" + msg + "\n";
+
+        out.println(str);
         String resp = in.readLine();
         return resp;
     }
@@ -50,16 +58,20 @@ public class Client {
             Scanner input = new Scanner(System.in);
             System.out.print("Enter your name: ");
 
-            Client user = new Client(input.next());
-            user.sendMessage(user.joined());
-
-            user.sendMessage("temp");
+            Client user = new Client(input.nextLine());
+            user.joined();
 
             String line = "";
-            do{
-                line = input.next();
+            while(true){
+                line = input.nextLine();
+
+                if(line.equals("exit()")){
+                    user.leave();
+                    break;
+                }
+
                 user.sendMessage(line);
-            }while(!line.equals("exit()"));
+            }
 
             stopConnection();
             input.close();
