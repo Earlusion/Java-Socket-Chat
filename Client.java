@@ -59,7 +59,6 @@ public class Client {
             do{
                 line = input.next();
                 user.sendMessage(line);
-                //System.out.println(line);
             }while(!line.equals("exit()"));
 
             stopConnection();
