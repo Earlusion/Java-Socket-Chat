@@ -73,7 +73,7 @@ public class Server {
         private static BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 
         out = new PrintWriter(sock.getOutputStream(), true);
-        //in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+        in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 
         public ChatRoom(Socket socket) {
             this.sock = socket;
